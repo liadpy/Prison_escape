@@ -9,12 +9,12 @@ public class GamePanel extends JPanel implements Runnable  {
     final int scale=3;
     public final int tilesize=origianltilesize*scale;//16x16 pix is very small so i make it bigger
 
-    final int scrnrow=12;//12 tiles on vertical
-    final int scrncol=16;//16 tiles on horizontal
+    final int scrnrow=28;//12 tiles on vertical
+    final int scrncol=40;//16 tiles on horizontal
     final int scrnhight=scrnrow*tilesize;//sum tiles*size of the tiles is the height of the scrn
     final int scrnwidth=scrncol*tilesize;//sum tiles*size of the tiles is the width of the scrn
 
-    public final int maxworldcol=80;
+    public final int maxworldcol=132;
     public final int maxworldrow=80;
     public final int worldwight=maxworldcol*tilesize;
     public final int worldheight=maxworldrow*tilesize;

@@ -19,8 +19,8 @@ public class Player extends Entity{
     public Player(GamePanel gp, KeyHandler keyHandler) {
         this.gp = gp;
         this.keyHandler = keyHandler;
-        worldx=500;//spawn points
-        worldy=400;
+        worldx=2000;//spawn points
+        worldy=1700;
         speed=4;
         setplayerimg();
         scrnx=gp.scrnwidth/2- gp.tilesize/2;
@@ -30,14 +30,14 @@ public class Player extends Entity{
     public void setplayerimg()
     {
         try {
-            down1=ImageIO.read(new FileInputStream("mydown1.png"));
-            down2=ImageIO.read(new FileInputStream("mydown2.png"));
-            left1=ImageIO.read(new FileInputStream("myleft1.png"));
-            left2=ImageIO.read(new FileInputStream("myleft2.png"));
-            up1=ImageIO.read(new FileInputStream("myup1.png"));
-            up2=ImageIO.read(new FileInputStream("myup2.png"));
-            right1=ImageIO.read(new FileInputStream("myright1.png"));
-            right2=ImageIO.read(new FileInputStream("myright2.png"));
+            down1=ImageIO.read(new FileInputStream("src/playersprites/mydown1.png"));
+            down2=ImageIO.read(new FileInputStream("src/playersprites/mydown2.png"));
+            left1=ImageIO.read(new FileInputStream("src/playersprites/myleft1.png"));
+            left2=ImageIO.read(new FileInputStream("src/playersprites/myleft2.png"));
+            up1=ImageIO.read(new FileInputStream("src/playersprites/myup1.png"));
+            up2=ImageIO.read(new FileInputStream("src/playersprites/myup2.png"));
+            right1=ImageIO.read(new FileInputStream("src/playersprites/myright1.png"));
+            right2=ImageIO.read(new FileInputStream("src/playersprites/myright2.png"));
 
 
         }catch (IOException e)
@@ -47,7 +47,7 @@ public class Player extends Entity{
     {
         if(keyHandler.uppress==true||keyHandler.rightpress==true||keyHandler.leftpress==true||keyHandler.downpress==true||keyHandler.gospeed==true) {
             if (keyHandler.gospeed == true) {//w
-                speed=6;
+                speed=12;
             }
             else speed=4;
             if (keyHandler.uppress == true) {//w

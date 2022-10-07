@@ -16,7 +16,7 @@ public class TileManager {
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tiles=new Tile[11];
+        tiles=new Tile[21];
         map=new int[gp.maxworldrow][gp.maxworldcol];
         setuptiles();
         loadmap();
@@ -40,6 +40,10 @@ public class TileManager {
             dict.put("e",14);
             dict.put("f",15);
             dict.put("g",16);
+            dict.put("h",17);
+            dict.put("i",18);
+            dict.put("j",19);
+            dict.put("k",20);
             BufferedReader filereader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("Map")));//opening map file to read from
             int i=0;
             while (i<gp.maxworldrow){
@@ -72,17 +76,29 @@ public class TileManager {
     }
     public void setuptiles(){
         try {
-            tiles[0]=new Tile(ImageIO.read(new FileInputStream("src/stonefloortile.png")),false);
-            tiles[1]=new Tile(ImageIO.read(new FileInputStream("src/woodtile.png")),false);
-            tiles[2]=new Tile(ImageIO.read(new FileInputStream("src/dirttile.png")),false);
-            tiles[3]=new Tile(ImageIO.read(new FileInputStream("src/bricktile.png")),false);
-            tiles[4]=new Tile(ImageIO.read(new FileInputStream("src/grasstile.png")),false);
-            tiles[5]=new Tile(ImageIO.read(new FileInputStream("src/bridgetile.png")),false);
-            tiles[6]=new Tile(ImageIO.read(new FileInputStream("src/watertile.png")),false);
-            tiles[7]=new Tile(ImageIO.read(new FileInputStream("src/bedtile.png")),false);
-            tiles[8]=new Tile(ImageIO.read(new FileInputStream("src/closechesttile.png")),false);
-            tiles[9]=new Tile(ImageIO.read(new FileInputStream("src/closechesttile.png")),false);
-            tiles[10]=new Tile(ImageIO.read(new FileInputStream("src/bedtile.png")),false);
+
+            tiles[0]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/stonefloortile.png")),false);
+            tiles[1]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/woodtile.png")),false);
+            tiles[2]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/sand.png")),false);
+            tiles[3]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/bricktile.png")),false);
+            tiles[4]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/grasstile.png")),false);
+            tiles[5]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/bridgetile.png")),false);
+            tiles[6]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/water2.png")),false);
+            tiles[7]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/bedtile.png")),false);
+            tiles[8]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/chest.png")),false);
+            tiles[9]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/treetile.png")),false);
+            tiles[10]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/blueflower.png")),false);
+            tiles[11]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/pinkflower.png")),false);
+            tiles[12]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/desk.png")),false);
+            tiles[13]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/desk2.png")),false);
+            tiles[14]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/bricks.png")),false);
+            tiles[15]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/stone.png")),false);
+            tiles[16]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/brickwall.png")),false);
+            tiles[17]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/brickwall2.png")),false);
+            tiles[18]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/slabtile.png")),false);
+            tiles[19]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/floor2tile.png")),false);
+            tiles[20]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/brickwall3.png")),false);
+
 
         } catch (IOException e) {
             e.printStackTrace();
