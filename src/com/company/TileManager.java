@@ -83,21 +83,21 @@ public class TileManager {
             tiles[3]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/bricktile.png")),false);
             tiles[4]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/grasstile.png")),false);
             tiles[5]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/bridgetile.png")),false);
-            tiles[6]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/water2.png")),false);
+            tiles[6]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/water2.png")),true);
             tiles[7]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/bedtile.png")),false);
             tiles[8]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/chest.png")),false);
-            tiles[9]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/treetile.png")),false);
+            tiles[9]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/treetile.png")),true);
             tiles[10]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/blueflower.png")),false);
             tiles[11]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/pinkflower.png")),false);
-            tiles[12]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/desk.png")),false);
-            tiles[13]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/desk2.png")),false);
-            tiles[14]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/bricks.png")),false);
+            tiles[12]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/desk.png")),true);
+            tiles[13]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/desk2.png")),true);
+            tiles[14]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/bricks.png")),true);
             tiles[15]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/stone.png")),false);
-            tiles[16]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/brickwall.png")),false);
-            tiles[17]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/brickwall2.png")),false);
+            tiles[16]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/brickwall.png")),true);
+            tiles[17]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/brickwall2.png")),true);
             tiles[18]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/slabtile.png")),false);
             tiles[19]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/floor2tile.png")),false);
-            tiles[20]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/brickwall3.png")),false);
+            tiles[20]=new Tile(ImageIO.read(new FileInputStream("src/tilepics/brickwall3.png")),true);
 
 
         } catch (IOException e) {

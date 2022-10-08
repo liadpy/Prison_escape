@@ -9,8 +9,8 @@ public class GamePanel extends JPanel implements Runnable  {
     final int scale=3;
     public final int tilesize=origianltilesize*scale;//16x16 pix is very small so i make it bigger
 
-    final int scrnrow=28;//12 tiles on vertical
-    final int scrncol=40;//16 tiles on horizontal
+    final int scrnrow=24;//12 tiles on vertical
+    final int scrncol=26;//16 tiles on horizontal
     final int scrnhight=scrnrow*tilesize;//sum tiles*size of the tiles is the height of the scrn
     final int scrnwidth=scrncol*tilesize;//sum tiles*size of the tiles is the width of the scrn
 
@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable  {
     KeyHandler keyhandler=new KeyHandler();
     Player player=new Player(this,keyhandler);
     TileManager tileManager=new TileManager(this);
+    public CollisionDetector collisionDetector=new CollisionDetector(this);
 
     public GamePanel()
     {

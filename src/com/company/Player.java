@@ -19,12 +19,14 @@ public class Player extends Entity{
     public Player(GamePanel gp, KeyHandler keyHandler) {
         this.gp = gp;
         this.keyHandler = keyHandler;
-        worldx=2000;//spawn points
-        worldy=1700;
+        worldx=2200;//spawn points
+        worldy=1800;
         speed=4;
         setplayerimg();
         scrnx=gp.scrnwidth/2- gp.tilesize/2;
         scrny=gp.scrnhight/2-gp.tilesize/2;
+
+        solid=new Rectangle(8,16,24,24);
 
     }
     public void setplayerimg()
@@ -51,21 +53,28 @@ public class Player extends Entity{
             }
             else speed=4;
             if (keyHandler.uppress == true) {//w
-                worldy -= speed;
                 direction = "up";
             }
             if (keyHandler.downpress == true) {//s
-                worldy += speed;
                 direction = "down";
             }
             if (keyHandler.leftpress == true) {//a
-                worldx -= speed;
                 direction = "left";
             }
             if (keyHandler.rightpress == true) {//d
-                worldx += speed;
                 direction = "right";
             }
+            this.iscollision=false;
+            gp.collisionDetector.checktile(this);
+            if(this.iscollision==false)
+                switch (direction){
+                    case "up":worldy -= speed;break;
+                    case "down":worldy += speed;break;
+                    case "left":worldx -= speed;break;
+                    case "right":worldx += speed;break;
+
+                }
+
             c2++;
             if (c2 > 10) {//sprite change after 1000/6 mili secs
                 c++;
