@@ -2,15 +2,14 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements Runnable  {
-    final int origianltilesize=16;//16x16 pixels
-    final int scale=3;
-    public final int tilesize=origianltilesize*scale;//16x16 pix is very small so i make it bigger
+    static final int origianltilesize=16;//16x16 pixels
+    public static final int scale=3;
+    public static final int tilesize=origianltilesize*scale;//16x16 pix is very small so i make it bigger
 
-    final int scrnrow=24;//12 tiles on vertical
-    final int scrncol=26;//16 tiles on horizontal
+    final int scrnrow=20;//12 tiles on vertical
+    final int scrncol=24;//16 tiles on horizontal
     final int scrnhight=scrnrow*tilesize;//sum tiles*size of the tiles is the height of the scrn
     final int scrnwidth=scrncol*tilesize;//sum tiles*size of the tiles is the width of the scrn
 
@@ -24,6 +23,20 @@ public class GamePanel extends JPanel implements Runnable  {
     Thread gamethread;
     KeyHandler keyhandler=new KeyHandler();
     Player player=new Player(this,keyhandler);
+
+    Key1 key1_1=new Key1(58,53);
+    twomodeobj firsttowndoor=new twomodeobj(79,50,"open","top","door1");
+    twomodeobj secondtowndoor=new twomodeobj(79,61,"open","top","door1");
+    twomodeobj thirdtowndoor=new twomodeobj(79,68,"open","bottom","door1");
+    twomodeobj fourthtowndoor1=new twomodeobj(91,58,"open","left","door1");
+    twomodeobj fourthtowndoor2=new twomodeobj(92,58,"closed","right","door1");
+    twomodeobj fifthtowndoor=new twomodeobj(108,60,"closed","bottom","door1");
+    twomodeobj labdoor=new twomodeobj(88,66,"closed","bottom","door1");
+    twomodeobj laketowndoor1=new twomodeobj(94,32,"closed","left","door1");
+    twomodeobj laketowndoor2=new twomodeobj(95,32,"closed","right","door1");
+
+    twomodeobj doormyhouse=new twomodeobj(56,39,"open","top","door1");
+
     TileManager tileManager=new TileManager(this);
     public CollisionDetector collisionDetector=new CollisionDetector(this);
 
@@ -34,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable  {
         this.setDoubleBuffered(true);//improve performance
         this.addKeyListener(keyhandler);
         this.setFocusable(true);//gamepanel can receive key input
+
         startgamethread();
     }
     public void startgamethread()
@@ -62,14 +76,27 @@ public class GamePanel extends JPanel implements Runnable  {
     }
     public void update()
     {
-       player.update();
+        player.update();
     }
 
-    public void paintComponent(Graphics g)//after the
+    public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
         Graphics2D g2=(Graphics2D)g;//cast to Graphics2D class // more funcs for 2D
         tileManager.draw(g2);
+
+        key1_1.draw(g2,this);//objs
+        doormyhouse.draw(g2,this);
+        firsttowndoor.draw(g2,this);
+        secondtowndoor.draw(g2,this);
+        thirdtowndoor.draw(g2,this);
+        fourthtowndoor1.draw(g2,this);
+        fourthtowndoor2.draw(g2,this);
+        fifthtowndoor.draw(g2,this);
+        labdoor.draw(g2,this);
+        laketowndoor1.draw(g2,this);
+        laketowndoor2.draw(g2,this);
+
         player.draw(g2);
         g2.dispose();
     }
