@@ -13,9 +13,8 @@ public class Key1 extends Obj {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        width=7*scale;
-        height=13*scale;
         this.worldy=worldy*GamePanel.tilesize-GamePanel.tilesize;
         this.worldx=worldx*GamePanel.tilesize-GamePanel.tilesize;
+        collision=false;
     }
 }

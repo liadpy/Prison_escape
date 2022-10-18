@@ -8,9 +8,11 @@ public class Obj {
     String name;
     BufferedImage image;
     int worldx,worldy;
-    int width,height;
-    int scale=GamePanel.scale;
     Boolean collision=false;
+    public Rectangle solidareaobj=new Rectangle(0,0,GamePanel.tilesize,GamePanel.tilesize);
+    int solidareadefultx=0;
+    int solidareadefulty=0;
+
 
     public void draw(Graphics2D g2,GamePanel gp)
     {

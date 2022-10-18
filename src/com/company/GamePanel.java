@@ -23,19 +23,7 @@ public class GamePanel extends JPanel implements Runnable  {
     Thread gamethread;
     KeyHandler keyhandler=new KeyHandler();
     Player player=new Player(this,keyhandler);
-
-    Key1 key1_1=new Key1(58,53);
-    twomodeobj firsttowndoor=new twomodeobj(79,50,"open","top","door1");
-    twomodeobj secondtowndoor=new twomodeobj(79,61,"open","top","door1");
-    twomodeobj thirdtowndoor=new twomodeobj(79,68,"open","bottom","door1");
-    twomodeobj fourthtowndoor1=new twomodeobj(91,58,"open","left","door1");
-    twomodeobj fourthtowndoor2=new twomodeobj(92,58,"closed","right","door1");
-    twomodeobj fifthtowndoor=new twomodeobj(108,60,"closed","bottom","door1");
-    twomodeobj labdoor=new twomodeobj(88,66,"closed","bottom","door1");
-    twomodeobj laketowndoor1=new twomodeobj(94,32,"closed","left","door1");
-    twomodeobj laketowndoor2=new twomodeobj(95,32,"closed","right","door1");
-
-    twomodeobj doormyhouse=new twomodeobj(56,39,"open","top","door1");
+    public static Obj objarr[]=new Obj[11];
 
     TileManager tileManager=new TileManager(this);
     public CollisionDetector collisionDetector=new CollisionDetector(this);
@@ -47,6 +35,17 @@ public class GamePanel extends JPanel implements Runnable  {
         this.setDoubleBuffered(true);//improve performance
         this.addKeyListener(keyhandler);
         this.setFocusable(true);//gamepanel can receive key input
+        objarr[0]=new Key1(58,53);
+        objarr[1]=new twomodeobj(79,50,"open","top","door1",false);
+        objarr[2]=new twomodeobj(79,61,"open","top","door1",false);
+        objarr[3]=new twomodeobj(79,68,"open","bottom","door1",false);
+        objarr[4]=new twomodeobj(91,58,"open","left","door1",false);
+        objarr[5]=new twomodeobj(92,58,"closed","right","door1",true);
+        objarr[6]=new twomodeobj(108,60,"closed","bottom","door1",true);
+        objarr[7]=new twomodeobj(88,66,"closed","bottom","door1",true);
+        objarr[8]=new twomodeobj(94,32,"closed","left","door1",true);
+        objarr[9]=new twomodeobj(95,32,"closed","right","door1",true);
+        objarr[10]=new twomodeobj(56,39,"open","top","door1",false);
 
         startgamethread();
     }
@@ -85,17 +84,11 @@ public class GamePanel extends JPanel implements Runnable  {
         Graphics2D g2=(Graphics2D)g;//cast to Graphics2D class // more funcs for 2D
         tileManager.draw(g2);
 
-        key1_1.draw(g2,this);//objs
-        doormyhouse.draw(g2,this);
-        firsttowndoor.draw(g2,this);
-        secondtowndoor.draw(g2,this);
-        thirdtowndoor.draw(g2,this);
-        fourthtowndoor1.draw(g2,this);
-        fourthtowndoor2.draw(g2,this);
-        fifthtowndoor.draw(g2,this);
-        labdoor.draw(g2,this);
-        laketowndoor1.draw(g2,this);
-        laketowndoor2.draw(g2,this);
+        for (int i=0;i<objarr.length;i++)
+        {
+            if(objarr[i]!=null)
+                objarr[i].draw(g2,this);
+        }
 
         player.draw(g2);
         g2.dispose();

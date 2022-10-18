@@ -62,5 +62,63 @@ public class CollisionDetector{
                 break;
         }
     }
+    public int checkObj(Entity entity){
+        int indx=-1;
+        for (int i=0;i<gp.objarr.length;i++){
+            if(gp.objarr[i]!=null) {
+                entity.solid.x += entity.worldx;//find entity's solid area pos
+                entity.solid.y += entity.worldy;
+
+                gp.objarr[i].solidareaobj.x += gp.objarr[i].worldx;//find obj's solid area pos
+                gp.objarr[i].solidareaobj.y += gp.objarr[i].worldy;
+
+                switch (entity.direction) {
+                    case "up":
+                        entity.solid.y -= entity.speed;
+                        if (entity.solid.intersects(gp.objarr[i].solidareaobj)) {//check if the 2 rects are touching(solid areas)
+                            if (gp.objarr[i].collision == true)
+                                entity.iscollision = true;
+                            else entity.iscollision = false;
+                            if (entity instanceof Player) indx = i;
+                        }
+                        break;
+                    case "down":
+                        entity.solid.y += entity.speed;
+                        if (entity.solid.intersects(gp.objarr[i].solidareaobj)) {
+                            if (gp.objarr[i].collision == true)
+                                entity.iscollision = true;
+                            else entity.iscollision = false;
+                            if (entity instanceof Player) indx = i;
+                        }
+                        break;
+                    case "left":
+                        entity.solid.x -= entity.speed;
+                        if (entity.solid.intersects(gp.objarr[i].solidareaobj)) {
+                            if (gp.objarr[i].collision == true)
+                                entity.iscollision = true;
+                            else entity.iscollision = false;
+                            if (entity instanceof Player) indx = i;
+                        }
+                        break;
+                    case "right":
+                        entity.solid.x += entity.speed;
+                        if (entity.solid.intersects(gp.objarr[i].solidareaobj)) {
+                            if (gp.objarr[i].collision == true)
+                                entity.iscollision = true;
+                            else entity.iscollision = false;
+                            if (entity instanceof Player) indx = i;
+                        }
+                        break;
+                }
+                entity.solid.x = entity.solidareadefultx;
+                entity.solid.y = entity.solidareadefulty;
+                gp.objarr[i].solidareaobj.x = gp.objarr[i].solidareadefultx;
+                gp.objarr[i].solidareaobj.y = gp.objarr[i].solidareadefulty;
+            }
+
+        }
+        System.out.println(indx);
+        return indx;
+    }
 
 }

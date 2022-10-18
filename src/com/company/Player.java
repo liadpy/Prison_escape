@@ -14,19 +14,23 @@ public class Player extends Entity{
     int c2=0;
     public final int scrnx;
     public final int scrny;
+    Boolean key1=false;
 
 
     public Player(GamePanel gp, KeyHandler keyHandler) {
         this.gp = gp;
         this.keyHandler = keyHandler;
-        worldx=2200;//spawn points
+        worldx=2700;//spawn points
         worldy=1800;
         speed=4;
         setplayerimg();
         scrnx=gp.scrnwidth/2- gp.tilesize/2;
         scrny=gp.scrnhight/2-gp.tilesize/2;
-
         solid=new Rectangle(8,16,24,24);
+        solidareadefultx=solid.x;
+        solidareadefulty=solid.y;
+
+
 
     }
     public void setplayerimg()
@@ -47,8 +51,8 @@ public class Player extends Entity{
     }
     public void update()
     {
-        if(keyHandler.uppress==true||keyHandler.rightpress==true||keyHandler.leftpress==true||keyHandler.downpress==true||keyHandler.gospeed==true) {
-            if (keyHandler.gospeed == true) {//w
+        if(keyHandler.uppress==true||keyHandler.rightpress==true||keyHandler.leftpress==true||keyHandler.downpress==true) {
+            if (keyHandler.gospeed == true) {
                 speed=12;
             }
             else speed=4;
@@ -64,8 +68,11 @@ public class Player extends Entity{
             if (keyHandler.rightpress == true) {//d
                 direction = "right";
             }
-            this.iscollision=false;
             gp.collisionDetector.checktile(this);
+            int obj_indx=gp.collisionDetector.checkObj(this);//todo look here
+            pickupobj(obj_indx);
+            if(obj_indx!=-1)
+            twomodeobj.openDoor(this,obj_indx);
             if(this.iscollision==false)
                 switch (direction){
                     case "up":worldy -= speed;break;
@@ -74,7 +81,6 @@ public class Player extends Entity{
                     case "right":worldx += speed;break;
 
                 }
-
             c2++;
             if (c2 > 10) {//sprite change after 1000/6 mili secs
                 c++;
@@ -82,6 +88,14 @@ public class Player extends Entity{
             }
         }
     }
+
+    public void pickupobj(int obj_indx) {
+        if(obj_indx!=-1&&gp.objarr[obj_indx] instanceof Key1){
+            key1=true;
+            gp.objarr[obj_indx]=null;
+        }
+    }
+
     public void draw(Graphics2D g2)
     {   BufferedImage image=changesprite();
         g2.drawImage(image,scrnx,scrny,48,48,null);

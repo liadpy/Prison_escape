@@ -13,4 +13,6 @@ public class Entity
 
     public Rectangle solid;
     public Boolean iscollision=false;
+    int solidareadefultx;
+    int solidareadefulty;
 }

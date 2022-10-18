@@ -50,7 +50,6 @@ public class TileManager {
                 String line=filereader.readLine();
                 String[] splitedline = line.split(" ");
                 for(int j=0;j<gp.maxworldcol;j++) {
-                    //System.out.println(splitedline[j]);
                     if(isnum(splitedline[j])==true)
                         map[i][j] = Integer.parseInt(splitedline[j]);
                     else
