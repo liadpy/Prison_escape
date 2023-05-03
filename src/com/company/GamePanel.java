@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable  {
     Thread gamethread;
     KeyHandler keyhandler=new KeyHandler();
     Player player=new Player(this,keyhandler);
-    public static Obj objarr[]=new Obj[11];
+    public static Obj objarr[]=new Obj[12];
 
     TileManager tileManager=new TileManager(this);
     public CollisionDetector collisionDetector=new CollisionDetector(this);
@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable  {
         this.setDoubleBuffered(true);//improve performance
         this.addKeyListener(keyhandler);
         this.setFocusable(true);//gamepanel can receive key input
-        objarr[0]=new Key1(58,53);
+        objarr[0]=new Picupobj(58,53 ,"src/objectspics/key1.png");
         objarr[1]=new twomodeobj(79,50,"open","top","door1",false);
         objarr[2]=new twomodeobj(79,61,"open","top","door1",false);
         objarr[3]=new twomodeobj(79,68,"open","bottom","door1",false);
@@ -46,6 +46,7 @@ public class GamePanel extends JPanel implements Runnable  {
         objarr[8]=new twomodeobj(94,32,"closed","left","door1",true);
         objarr[9]=new twomodeobj(95,32,"closed","right","door1",true);
         objarr[10]=new twomodeobj(56,39,"open","top","door1",false);
+        objarr[11]=new Picupobj(94,26,"src/objectspics/fireball.png");
 
         startgamethread();
     }

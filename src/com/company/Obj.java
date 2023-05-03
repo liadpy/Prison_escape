@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 public class Obj {
     String name;
     BufferedImage image;
+    BufferedImage image2;
     int worldx,worldy;
     Boolean collision=false;
     public Rectangle solidareaobj=new Rectangle(0,0,GamePanel.tilesize,GamePanel.tilesize);

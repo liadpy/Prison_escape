@@ -15,4 +15,7 @@ public class Entity
     public Boolean iscollision=false;
     int solidareadefultx;
     int solidareadefulty;
+
+    public int maxhp;
+    public int hp;
 }

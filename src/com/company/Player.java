@@ -15,6 +15,8 @@ public class Player extends Entity{
     public final int scrnx;
     public final int scrny;
     Boolean key1=false;
+    Boolean fireball=false;
+    BufferedImage fullheart , blankhreat;
 
 
     public Player(GamePanel gp, KeyHandler keyHandler) {
@@ -30,6 +32,9 @@ public class Player extends Entity{
         solidareadefultx=solid.x;
         solidareadefulty=solid.y;
 
+        maxhp=3;
+        hp=3;
+
 
 
     }
@@ -44,6 +49,10 @@ public class Player extends Entity{
             up2=ImageIO.read(new FileInputStream("src/playersprites/myup2.png"));
             right1=ImageIO.read(new FileInputStream("src/playersprites/myright1.png"));
             right2=ImageIO.read(new FileInputStream("src/playersprites/myright2.png"));
+
+
+            fullheart=ImageIO.read(new FileInputStream("src/objectspics/heart.png"));
+            blankhreat=ImageIO.read(new FileInputStream("src/objectspics/emptyheart.png"));
 
 
         }catch (IOException e)
@@ -90,15 +99,33 @@ public class Player extends Entity{
     }
 
     public void pickupobj(int obj_indx) {
-        if(obj_indx!=-1&&gp.objarr[obj_indx] instanceof Key1){
-            key1=true;
-            gp.objarr[obj_indx]=null;
+        if(obj_indx!=-1&&gp.objarr[obj_indx] instanceof Picupobj){
+            if (((Picupobj) gp.objarr[obj_indx]).img=="src/objectspics/key1.png"){
+                key1=true;
+                gp.objarr[obj_indx]=null;
+            }
+            else if (((Picupobj) gp.objarr[obj_indx]).img=="src/objectspics/fireball.png")
+            {
+                fireball=true;
+                gp.objarr[obj_indx]=null;
+            }
+
+
         }
     }
 
     public void draw(Graphics2D g2)
-    {   BufferedImage image=changesprite();
+    {
+        BufferedImage image=changesprite();
         g2.drawImage(image,scrnx,scrny,48,48,null);
+
+
+        //drawing player hp
+        for (int i=0;i<hp;i++){
+            g2.drawImage(fullheart,48+i*48,48,48,48,null);
+        }
+        for (int i=hp;i<maxhp;i++)
+            g2.drawImage(blankhreat,48+i*48,48,48,48,null);
     }
     public BufferedImage changesprite()
     {
