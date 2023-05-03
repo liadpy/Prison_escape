@@ -21,15 +21,7 @@ public class TileManager {
         setuptiles();
         loadmap();
     }
-    public void printmap(int map2[][])
-    {
-        int num;
-        for(int i=0;i< map2.length;i++)
-            for(int j=0;j< map2.length;j++) {
-                num = map2[i][j];
-                System.out.println(num);
-            }
-    }
+
     public void loadmap(){
         try {
             HashMap<String, Integer> dict = new HashMap<String, Integer>();
@@ -58,7 +50,6 @@ public class TileManager {
                 i++;
             }
             filereader.close();
-            printmap(map);
 
         }catch (Exception e){}
 

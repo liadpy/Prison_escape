@@ -117,8 +117,108 @@ public class CollisionDetector{
             }
 
         }
-        System.out.println(indx);
         return indx;
+    }
+
+
+
+
+
+    public int checkentity(Entity entity,Entity[] target){//# *** "entity"=player
+        int indx=-1;
+        for (int i=0;i<target.length;i++){
+            if(target[i]!=null) {
+                entity.solid.x += entity.worldx;//find entity's solid area pos
+                entity.solid.y += entity.worldy;
+
+                target[i].solid.x += target[i].worldx;//find obj's solid area pos
+                target[i].solid.y += target[i].worldy;
+
+                switch (entity.direction) {
+                    case "up":
+                        entity.solid.y -= entity.speed;
+                        if (entity.solid.intersects(target[i].solid)) {//check if the 2 rects are touching(solid areas)
+                            entity.iscollision = true;
+                            indx = i;
+                        }
+                        break;
+                    case "down":
+                        entity.solid.y += entity.speed;
+                        if (entity.solid.intersects(target[i].solid)) {
+                            entity.iscollision = true;
+                            indx = i;
+                        }
+                        break;
+                    case "left":
+                        entity.solid.x -= entity.speed;
+                        if (entity.solid.intersects(target[i].solid)) {
+                            entity.iscollision = true;
+                            indx = i;
+                        }
+                        break;
+                    case "right":
+                        entity.solid.x += entity.speed;
+                        if (entity.solid.intersects(target[i].solid)) {
+                            entity.iscollision = true;
+                            indx = i;
+                        }
+                        break;
+                }
+                entity.solid.x = entity.solidareadefultx;
+                entity.solid.y = entity.solidareadefulty;
+                target[i].solid.x = target[i].solidareadefultx;
+                target[i].solid.y = target[i].solidareadefulty;
+            }
+
+        }
+        return indx;
+    }
+    public Boolean checkplayer(Entity entity){
+            Boolean hit=false;
+            if(gp.player!=null) {
+                entity.solid.x += entity.worldx;//find entity's solid area pos
+                entity.solid.y += entity.worldy;
+
+                gp.player.solid.x += gp.player.worldx;//find obj's solid area pos
+                gp.player.solid.y += gp.player.worldy;
+
+                switch (entity.direction) {
+                    case "up":
+                        entity.solid.y -= entity.speed;
+                        if (entity.solid.intersects(gp.player.solid)) {//check if the 2 rects are touching(solid areas)
+                            entity.iscollision = true;
+                            hit=true;
+                        }
+                        break;
+                    case "down":
+                        entity.solid.y += entity.speed;
+                        if (entity.solid.intersects(gp.player.solid)) {
+                            entity.iscollision = true;
+                            hit=true;
+                        }
+                        break;
+                    case "left":
+                        entity.solid.x -= entity.speed;
+                        if (entity.solid.intersects(gp.player.solid)) {
+                            entity.iscollision = true;
+                            hit=true;
+                        }
+                        break;
+                    case "right":
+                        entity.solid.x += entity.speed;
+                        if (entity.solid.intersects(gp.player.solid)) {
+                            entity.iscollision = true;
+                            hit=true;
+                        }
+                        break;
+                }
+                entity.solid.x = entity.solidareadefultx;
+                entity.solid.y = entity.solidareadefulty;
+                gp.player.solid.x = gp.player.solidareadefultx;
+                gp.player.solid.y = gp.player.solidareadefulty;
+            }
+            return hit;
+
     }
 
 }

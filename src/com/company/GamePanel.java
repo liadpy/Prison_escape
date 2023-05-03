@@ -25,6 +25,10 @@ public class GamePanel extends JPanel implements Runnable  {
     Player player=new Player(this,keyhandler);
     public static Obj objarr[]=new Obj[12];
 
+
+    public static EnemyTesla enemyTesla_array[]=new EnemyTesla[3];
+
+
     TileManager tileManager=new TileManager(this);
     public CollisionDetector collisionDetector=new CollisionDetector(this);
 
@@ -48,12 +52,24 @@ public class GamePanel extends JPanel implements Runnable  {
         objarr[10]=new twomodeobj(56,39,"open","top","door1",false);
         objarr[11]=new Picupobj(94,26,"src/objectspics/fireball.png");
 
-        startgamethread();
+        enemyTesla_array[0]=new EnemyTesla(23,23,this);
+        enemyTesla_array[1]=new EnemyTesla(13,13,this);
+        enemyTesla_array[2]=new EnemyTesla(25,25,this);
+
+        startgamethread(enemyTesla_array);
     }
-    public void startgamethread()
+    public void startgamethread(EnemyTesla[] tesla_array)
     {
+
+        for (EnemyTesla tes:tesla_array) {
+            Thread t1 = new Thread(tes);
+            t1.start();
+        }
+
+
         gamethread=new Thread(this);
         gamethread.start();
+
     }
     @Override
     public void run()
@@ -90,6 +106,13 @@ public class GamePanel extends JPanel implements Runnable  {
             if(objarr[i]!=null)
                 objarr[i].draw(g2,this);
         }
+        // drawing the enemy, is updates by ti self in its thread
+        for (EnemyTesla tes:enemyTesla_array) {
+            tes.draw(g2,this);
+        }
+
+
+
 
         player.draw(g2);
         g2.dispose();

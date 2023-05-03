@@ -12,6 +12,7 @@ public class Player extends Entity{
     KeyHandler keyHandler;
     int c=0;
     int c2=0;
+    int invis_c=0;
     public final int scrnx;
     public final int scrny;
     Boolean key1=false;
@@ -34,6 +35,7 @@ public class Player extends Entity{
 
         maxhp=3;
         hp=3;
+
 
 
 
@@ -82,6 +84,8 @@ public class Player extends Entity{
             pickupobj(obj_indx);
             if(obj_indx!=-1)
             twomodeobj.openDoor(this,obj_indx);
+            int tesindx =gp.collisionDetector.checkentity(this,gp.enemyTesla_array);//checking if player about to touch a tesla
+            take_dmg_from_tesla(tesindx);
             if(this.iscollision==false)
                 switch (direction){
                     case "up":worldy -= speed;break;
@@ -96,8 +100,24 @@ public class Player extends Entity{
                 c2 = 0;
             }
         }
-    }
+        if (timed_dmg==true)
+        {
+            invis_c++;
+            if(invis_c>80){     //giving timed_dmg 1.5~ secs to be true
+                invis_c=0;
+                timed_dmg=false;
+            }
+        }
 
+
+    }
+    public synchronized void take_dmg_from_tesla(int tesindx){ // synchronized cuz dont want any double dmg ... while timed_dmg didnt start the timer of 1,5 secs
+        if(tesindx!=-1&&!timed_dmg)  //if hitting a tesla
+        {
+            hp-=1;
+            timed_dmg=true;     //preventing too much dmg in 1 strike
+        }
+    }
     public void pickupobj(int obj_indx) {
         if(obj_indx!=-1&&gp.objarr[obj_indx] instanceof Picupobj){
             if (((Picupobj) gp.objarr[obj_indx]).img=="src/objectspics/key1.png"){
@@ -122,11 +142,13 @@ public class Player extends Entity{
 
         //drawing player hp
         for (int i=0;i<hp;i++){
-            g2.drawImage(fullheart,48+i*48,48,48,48,null);
+            g2.drawImage(fullheart,48+i*56,56,56,48,null);
         }
-        for (int i=hp;i<maxhp;i++)
-            g2.drawImage(blankhreat,48+i*48,48,48,48,null);
+        for (int i=hp;i<maxhp-1;i++)
+            g2.drawImage(blankhreat,48+i*56,56,56,56,null);
     }
+
+
     public BufferedImage changesprite()
     {
 
