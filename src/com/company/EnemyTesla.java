@@ -39,10 +39,10 @@ public class EnemyTesla extends Entity implements Runnable {
             else if(num ==3){this.direction="left";}
             else if(num ==4){this.direction="right";}
             int n=rand.nextInt((50 - 30) + 30) + 30;
-            gp.collisionDetector.checktile(this);
+            gp.collisionDetector.checktile(this,gp.sem);
             for(int i=0;i<n;i++){
-                gp.collisionDetector.checktile(this);
-                Boolean hit_player=gp.collisionDetector.checkplayer(this);
+                gp.collisionDetector.checktile(this,gp.sem);
+                Boolean hit_player=gp.collisionDetector.checkplayer(this,gp.sem);
                 if(hit_player)
                     gp.player.take_dmg_from_tesla(1);
 

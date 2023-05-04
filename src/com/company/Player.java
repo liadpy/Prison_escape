@@ -13,6 +13,7 @@ public class Player extends Entity{
     int c=0;
     int c2=0;
     int invis_c=0;
+    int shooting_fire_cooldown_c=0;
     public final int scrnx;
     public final int scrny;
     Boolean key1=false;
@@ -67,6 +68,7 @@ public class Player extends Entity{
                 speed=12;
             }
             else speed=4;
+
             if (keyHandler.uppress == true) {//w
                 direction = "up";
             }
@@ -79,12 +81,23 @@ public class Player extends Entity{
             if (keyHandler.rightpress == true) {//d
                 direction = "right";
             }
-            gp.collisionDetector.checktile(this);
-            int obj_indx=gp.collisionDetector.checkObj(this);//todo look here
+            if(keyHandler.spacepress==true&&fireball==true)//space to shoot a fireball
+            {
+                if (shooting_fire_cooldown_c<1) {
+                    shooting_fire_cooldown_c=20;
+                    gp.fire_balls.add(new Fire_ball(this.worldx, this.worldy, gp, this.direction));
+                    Thread t1 = new Thread(gp.fire_balls.get(gp.fire_balls.size() - 1));
+                    t1.start();
+                }
+            }
+            if (shooting_fire_cooldown_c>0)
+                shooting_fire_cooldown_c--;
+            gp.collisionDetector.checktile(this,gp.sem);
+            int obj_indx=gp.collisionDetector.checkObj(this,gp.sem);//todo look here
             pickupobj(obj_indx);
             if(obj_indx!=-1)
             twomodeobj.openDoor(this,obj_indx);
-            int tesindx =gp.collisionDetector.checkentity(this,gp.enemyTesla_array);//checking if player about to touch a tesla
+            int tesindx =gp.collisionDetector.checkentity(this,gp.enemyTesla_array,gp.sem);//checking if player about to touch a tesla
             take_dmg_from_tesla(tesindx);
             if(this.iscollision==false)
                 switch (direction){

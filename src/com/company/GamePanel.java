@@ -2,6 +2,9 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.concurrent.Semaphore;
 
 public class GamePanel extends JPanel implements Runnable  {
     static final int origianltilesize=16;//16x16 pixels
@@ -19,11 +22,12 @@ public class GamePanel extends JPanel implements Runnable  {
     public final int worldheight=maxworldrow*tilesize;
 
     final int FPS=60;
-
+    Semaphore sem = new Semaphore(1);
     Thread gamethread;
     KeyHandler keyhandler=new KeyHandler();
     Player player=new Player(this,keyhandler);
     public static Obj objarr[]=new Obj[12];
+    ArrayList<Fire_ball> fire_balls = new ArrayList<Fire_ball>(); // Create an ArrayList object
 
 
     public static EnemyTesla enemyTesla_array[]=new EnemyTesla[3];
@@ -109,6 +113,14 @@ public class GamePanel extends JPanel implements Runnable  {
         // drawing the enemy, is updates by ti self in its thread
         for (EnemyTesla tes:enemyTesla_array) {
             tes.draw(g2,this);
+        }
+        for (int i = 0; i < fire_balls.size(); i++) {
+            try {
+                fire_balls.get(i).draw(g2,this);
+            }catch (NullPointerException e){
+                System.out.println("NullPointerException in draw fireballs");
+            }
+
         }
 
 
