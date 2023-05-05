@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Random;
 
 public class EnemyTesla extends Entity implements Runnable {
+    public Boolean alive =true;
     public EnemyTesla(int wrldx, int wrldy,GamePanel gp) {
         speed = 3;
         try {
@@ -32,7 +33,7 @@ public class EnemyTesla extends Entity implements Runnable {
         int cooldown=0;
         Random rand = new Random();
 
-        while (true) {
+        while (alive) {
             int num=rand.nextInt((4 - 1) + 1) + 1;
 
             if(num ==1){this.direction="up";}

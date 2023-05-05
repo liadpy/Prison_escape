@@ -44,11 +44,21 @@ public class Fire_ball extends Entity implements Runnable{
                 gp.fire_balls.remove(this);
                 break;
             }
-            int hit_tesla=gp.collisionDetector.checkentity(this,gp.enemyTesla_array,gp.sem);
+            int hit_tesla=gp.collisionDetector.checkentity(this,gp.enemyTesla_array,gp.sem);//if fire ball hit a tesla delete the tesla
                 if (hit_tesla!=-1)
                 {
+                    try {
+                        gp.sem.acquire();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    gp.enemyTesla_array[hit_tesla].alive=false; // killing the tesla by breaking its thread loop
                     gp.enemyTesla_array[hit_tesla]=null;
                     gp.fire_balls.remove(this);
+                    gp.player.teslas_killed_c++;
+                    System.out.println("killed "+gp.player.teslas_killed_c+" teslas");
+
+                    gp.sem.release();
                     break;
                 }
                 if(this.iscollision==false){

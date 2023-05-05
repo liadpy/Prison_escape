@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Tes_ball extends Entity implements Runnable{
+
     public Tes_ball(int wrldx, int wrldy,GamePanel gp,String direction) {
         speed = 5;
         try {
@@ -37,7 +38,18 @@ public class Tes_ball extends Entity implements Runnable{
     public void run() {
         while (true){
 
-
+            gp.collisionDetector.checktile(this,gp.sem);
+            if(this.iscollision==true){
+                gp.tes_balls.remove(this);
+                break;
+            }
+            Boolean hit_player=gp.collisionDetector.checkplayer(this,gp.sem);//checking if ball touch the player
+            if(hit_player){
+                gp.player.take_dmg_from_tesla(1);
+                gp.tes_balls.remove(this);
+                System.out.println("i hit the player");
+                break;
+            }
                 switch (this.direction){
                     case "up":this.worldy -= speed;break;
                     case "down":this.worldy += speed;break;

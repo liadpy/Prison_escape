@@ -19,6 +19,7 @@ public class Player extends Entity{
     Boolean key1=false;
     Boolean fireball=false;
     BufferedImage fullheart , blankhreat;
+    int teslas_killed_c=0;
 
 
     public Player(GamePanel gp, KeyHandler keyHandler) {
@@ -63,6 +64,7 @@ public class Player extends Entity{
     }
     public void update()
     {
+        System.out.println("hp: "+hp);
         if(keyHandler.uppress==true||keyHandler.rightpress==true||keyHandler.leftpress==true||keyHandler.downpress==true) {
 
             if (keyHandler.gospeed == true) {
@@ -109,7 +111,7 @@ public class Player extends Entity{
 
                 }
             c2++;
-            if (c2 > 10) {//sprite change after 1000/6 mili secs
+            if (c2 > 10) {//sprite changeing
                 c++;
                 c2 = 0;
             }

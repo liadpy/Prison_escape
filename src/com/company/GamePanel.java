@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxworldrow = 80;
     public final int worldwight = maxworldcol * tilesize;
     public final int worldheight = maxworldrow * tilesize;
-
+    public String username;
     final int FPS = 60;
     Semaphore sem = new Semaphore(1);
     Thread gamethread;
@@ -29,20 +29,19 @@ public class GamePanel extends JPanel implements Runnable {
     public static Obj objarr[] = new Obj[12];
     ArrayList<Fire_ball> fire_balls = new ArrayList<Fire_ball>();
     ArrayList<Tes_ball> tes_balls = new ArrayList<Tes_ball>();
-
-
-    public EnemyTesla enemyTesla_array[] = new EnemyTesla[3];
+    public EnemyTesla enemyTesla_array[] = new EnemyTesla[11];
 
 
     TileManager tileManager = new TileManager(this);
     public CollisionDetector collisionDetector = new CollisionDetector(this);
 
-    public GamePanel() {
+    public GamePanel(String username) {
         this.setPreferredSize(new Dimension(scrnwidth, scrnhight));//giveing the panel it's size
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);//improve performance
         this.addKeyListener(keyhandler);
         this.setFocusable(true);//gamepanel can receive key input
+        this.username=username;
         objarr[0] = new Picupobj(58, 53, "src/objectspics/key1.png");
         objarr[1] = new twomodeobj(79, 50, "open", "top", "door1", false);
         objarr[2] = new twomodeobj(79, 61, "open", "top", "door1", false);
@@ -59,6 +58,15 @@ public class GamePanel extends JPanel implements Runnable {
         enemyTesla_array[0] = new EnemyTesla(23, 23, this);
         enemyTesla_array[1] = new EnemyTesla(13, 13, this);
         enemyTesla_array[2] = new EnemyTesla(25, 25, this);
+        enemyTesla_array[3] = new EnemyTesla(120, 59, this);
+        enemyTesla_array[4] = new EnemyTesla(120, 57, this);
+        enemyTesla_array[5] = new EnemyTesla(120, 64, this);
+        enemyTesla_array[6] = new EnemyTesla(98, 70, this);
+        enemyTesla_array[7] = new EnemyTesla(12, 29, this);
+        enemyTesla_array[8] = new EnemyTesla(19, 39, this);
+        enemyTesla_array[9] = new EnemyTesla(19, 39, this);
+        enemyTesla_array[10] = new EnemyTesla(98, 67, this);
+
 
         startgamethread(enemyTesla_array);
     }
