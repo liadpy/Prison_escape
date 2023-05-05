@@ -64,6 +64,7 @@ public class Player extends Entity{
     public void update()
     {
         if(keyHandler.uppress==true||keyHandler.rightpress==true||keyHandler.leftpress==true||keyHandler.downpress==true) {
+
             if (keyHandler.gospeed == true) {
                 speed=12;
             }

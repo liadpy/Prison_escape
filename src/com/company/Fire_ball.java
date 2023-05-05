@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Fire_ball extends Entity implements Runnable{
     public Fire_ball(int wrldx, int wrldy,GamePanel gp,String direction) {
-        speed = 3;
+        speed = 5;
         try {
             up1 = ImageIO.read(new FileInputStream("src/objectspics/fireball.png"));
 
@@ -44,6 +44,13 @@ public class Fire_ball extends Entity implements Runnable{
                 gp.fire_balls.remove(this);
                 break;
             }
+            int hit_tesla=gp.collisionDetector.checkentity(this,gp.enemyTesla_array,gp.sem);
+                if (hit_tesla!=-1)
+                {
+                    gp.enemyTesla_array[hit_tesla]=null;
+                    gp.fire_balls.remove(this);
+                    break;
+                }
                 if(this.iscollision==false){
                     switch (this.direction){
                         case "up":this.worldy -= speed;break;

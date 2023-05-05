@@ -24,11 +24,12 @@ public class EnemyTesla extends Entity implements Runnable {
         this.worldx = wrldx * GamePanel.tilesize - GamePanel.tilesize;
         this.worldy = wrldy * GamePanel.tilesize - GamePanel.tilesize;
         direction="up";
+
     }
 
     @Override
     public void run() {
-
+        int cooldown=0;
         Random rand = new Random();
 
         while (true) {
@@ -54,6 +55,48 @@ public class EnemyTesla extends Entity implements Runnable {
                     case "right":this.worldx += speed;break;
                     }
                 }
+                cooldown--;
+                if(gp.player.worldy==this.worldy||gp.player.worldy+1==this.worldy||gp.player.worldy-1==this.worldy||gp.player.worldy+2==this.worldy||gp.player.worldy-2==this.worldy){//looking for player horizontaly checking range of 5 pixels
+
+                    if(this.worldx-gp.player.worldx<0&&Math.abs(this.worldx-gp.player.worldx)<= gp.scrnwidth&&cooldown<=0)//shoot right (checking side to shoot&checking distance)
+                    {
+                        gp.tes_balls.add(new Tes_ball(this.worldx, this.worldy, gp, "right"));
+                        Thread t1 = new Thread(gp.tes_balls.get(gp.tes_balls.size() - 1));
+                        t1.start();
+                        cooldown=60;
+                        System.out.println("shooting right");
+                    }
+
+                    if(this.worldx-gp.player.worldx>0&&Math.abs(this.worldx-gp.player.worldx)<= gp.scrnwidth&&cooldown<=0)//shoot left
+                    {
+                        gp.tes_balls.add(new Tes_ball(this.worldx, this.worldy, gp, "left"));
+                        Thread t1 = new Thread(gp.tes_balls.get(gp.tes_balls.size() - 1));
+                        t1.start();
+                        cooldown=60;
+                        System.out.println("shooting left");
+                    }
+                }
+                if(gp.player.worldx==this.worldx||gp.player.worldx+1==this.worldx||gp.player.worldx-1==this.worldx||gp.player.worldx+2==this.worldx||gp.player.worldx-2==this.worldx){//looking for player verticaly
+
+                    if(this.worldy-gp.player.worldy<0&&Math.abs(this.worldx-gp.player.worldx)<= gp.scrnhight&&cooldown<=0)//shoot down
+                    {
+                        gp.tes_balls.add(new Tes_ball(this.worldx, this.worldy, gp, "down"));
+                        Thread t1 = new Thread(gp.tes_balls.get(gp.tes_balls.size() - 1));
+                        t1.start();
+                        cooldown=60;
+                        System.out.println("shooting down");
+                    }
+
+                    if(this.worldy-gp.player.worldy>0&&Math.abs(this.worldx-gp.player.worldx)<= gp.scrnhight&&cooldown<=0)//shoot up
+                    {
+                        gp.tes_balls.add(new Tes_ball(this.worldx, this.worldy, gp, "up"));
+                        Thread t1 = new Thread(gp.tes_balls.get(gp.tes_balls.size() - 1));
+                        t1.start();
+                        cooldown=60;
+                        System.out.println("shooting up");
+                    }
+                }
+
                 try {
                     Thread.sleep(1000/30);
                 } catch (InterruptedException e) {
@@ -65,6 +108,7 @@ public class EnemyTesla extends Entity implements Runnable {
         }
 
     }
+
     public void draw(Graphics2D g2,GamePanel gp)
     {
         int scrnx1=worldx-gp.player.worldx +gp.player.scrnx;

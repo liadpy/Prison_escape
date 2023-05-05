@@ -171,7 +171,6 @@ public class CollisionDetector{
             }
 
         }
-        
         return indx;
     }
     public Boolean checkplayer(Entity entity,Semaphore sem){
