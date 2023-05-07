@@ -45,7 +45,7 @@ public class Tes_ball extends Entity implements Runnable{
             }
             Boolean hit_player=gp.collisionDetector.checkplayer(this,gp.sem);//checking if ball touch the player
             if(hit_player){
-                gp.player.take_dmg_from_tesla(1);
+                gp.player.take_dmg_from_tesla(-2);
                 gp.tes_balls.remove(this);
                 System.out.println("i hit the player");
                 break;

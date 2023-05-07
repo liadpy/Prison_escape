@@ -3,10 +3,8 @@ package com.company;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.Socket;
 import java.util.*;
 
 public class TileManager {
@@ -24,6 +22,30 @@ public class TileManager {
 
     public void loadmap(){
         try {
+            Socket socket = new Socket("localhost", 1234);
+            System.out.println("Connected to server.");
+
+            // Read the file from the server
+            InputStream is = socket.getInputStream();
+            String saveDir = "src/maps/";
+            File saveDirFile = new File(saveDir);
+            saveDirFile.mkdirs();
+            String filename = "receivedFile.txt";
+            String filePath = saveDir + filename;
+            File receivedFile = new File(filePath);
+            receivedFile.createNewFile();
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(receivedFile));
+
+            byte[] buffer = new byte[1024];
+            int count;
+            while ((count = is.read(buffer)) > 0) {
+                bos.write(buffer, 0, count);
+            }
+
+            // Close the streams and the socket
+            bos.close();
+            socket.close();
+            System.out.println("File received and saved to " + filePath);
             HashMap<String, Integer> dict = new HashMap<String, Integer>();
             dict.put("a",10);
             dict.put("b",11);
@@ -36,10 +58,10 @@ public class TileManager {
             dict.put("i",18);
             dict.put("j",19);
             dict.put("k",20);
-            BufferedReader filereader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("Map")));//opening map file to read from
+            BufferedReader reader = new BufferedReader(new FileReader(receivedFile));
             int i=0;
             while (i<gp.maxworldrow){
-                String line=filereader.readLine();
+                String line=reader.readLine();
                 String[] splitedline = line.split(" ");
                 for(int j=0;j<gp.maxworldcol;j++) {
                     if(isnum(splitedline[j])==true)
@@ -49,7 +71,7 @@ public class TileManager {
                 }
                 i++;
             }
-            filereader.close();
+            reader.close();
 
         }catch (Exception e){}
 

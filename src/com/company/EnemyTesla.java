@@ -19,7 +19,6 @@ public class EnemyTesla extends Entity implements Runnable {
         solid = new Rectangle(3, 3, 39, 39);
         solidareadefultx = solid.x;
         solidareadefulty = solid.y;
-        hp = 1;
         this.gp=gp;
 
         this.worldx = wrldx * GamePanel.tilesize - GamePanel.tilesize;
@@ -46,7 +45,7 @@ public class EnemyTesla extends Entity implements Runnable {
                 gp.collisionDetector.checktile(this,gp.sem);
                 Boolean hit_player=gp.collisionDetector.checkplayer(this,gp.sem);
                 if(hit_player)
-                    gp.player.take_dmg_from_tesla(1);
+                    gp.player.take_dmg_from_tesla(-2);
 
                 if(this.iscollision==false){
                 switch (direction){

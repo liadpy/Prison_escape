@@ -96,7 +96,7 @@ public class Player extends Entity{
             if (shooting_fire_cooldown_c>0)
                 shooting_fire_cooldown_c--;
             gp.collisionDetector.checktile(this,gp.sem);
-            int obj_indx=gp.collisionDetector.checkObj(this,gp.sem);//todo look here
+            int obj_indx=gp.collisionDetector.checkObj(this,gp.sem);
             pickupobj(obj_indx);
             if(obj_indx!=-1)
             twomodeobj.openDoor(this,obj_indx);
