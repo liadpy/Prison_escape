@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Main {
 
     public static void main(String[] args) {
-        //new Launchgame();
+
         ImageIcon imageIcon = new ImageIcon("");
 
         JFrame frame=new JFrame();
@@ -59,7 +59,8 @@ public class Main {
         leadbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO leaderboard page
+                new Leaderboard();
+                frame.dispose();
             }
         });
     }

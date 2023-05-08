@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
@@ -64,7 +65,7 @@ public class Player extends Entity{
     }
     public void update()
     {
-        System.out.println("hp: "+hp);
+
         if(keyHandler.uppress==true||keyHandler.rightpress==true||keyHandler.leftpress==true||keyHandler.downpress==true) {
 
             if (keyHandler.gospeed == true) {

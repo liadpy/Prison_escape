@@ -30,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     ArrayList<Fire_ball> fire_balls = new ArrayList<Fire_ball>();
     ArrayList<Tes_ball> tes_balls = new ArrayList<Tes_ball>();
     public EnemyTesla enemyTesla_array[] = new EnemyTesla[11];
+    Boolean x=true;
 
 
     TileManager tileManager = new TileManager(this);
@@ -86,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        while (gamethread != null) {
+        while (gamethread != null&&x) {
             update();
 
 
@@ -96,6 +97,10 @@ public class GamePanel extends JPanel implements Runnable {
                 Thread.sleep(1000 / FPS);//delay so things dont move around @ super speed
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            if (player.hp<1){
+                JOptionPane.showMessageDialog(null,"You are Dead D:");
+                x=false;
             }
 
         }
@@ -140,5 +145,6 @@ public class GamePanel extends JPanel implements Runnable {
             player.draw(g2);
             g2.dispose();
         }
+        
     }
 
